@@ -1,13 +1,16 @@
-package com.yuepaijie.controller.demotest.testthreadlocal;
+
+package tech.summary.demotest.testthreadlocal;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 class ThreadLocalDemo2 {
+
   //static AtomicInteger a = new AtomicInteger(0);
-  public static ThreadLocal<AtomicInteger> t1 = ThreadLocal.withInitial(()->new AtomicInteger(0));
+  public static ThreadLocal<AtomicInteger> t1 = ThreadLocal.withInitial(() -> new AtomicInteger(0));
 }
 
 class ThreadA extends Thread {
+
   @Override
   public void run() {
     try {
@@ -22,6 +25,7 @@ class ThreadA extends Thread {
 }
 
 class ThreadB extends Thread {
+
   @Override
   public void run() {
     try {
@@ -36,6 +40,7 @@ class ThreadB extends Thread {
 }
 
 class Test {
+
   public static void main(String[] args) {
     try {
       ThreadA a = new ThreadA();
@@ -51,3 +56,4 @@ class Test {
     }
   }
 }
+

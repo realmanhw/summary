@@ -1,20 +1,24 @@
-//package com.yuepaijie.controller;
+//package tech.summary.demotest.testthreadlocal;
 //
-///**
-// * volatile在i++的情况下失效，因为这不是原子操作
-// */
+//import java.util.concurrent.atomic.AtomicInteger;
 //
-//public class ThreadLocalDemo3 {
+//class ThreadLocalDemo2 {
 //
-//  public volatile static Integer t1 = 0;
+//  static AtomicInteger a = new AtomicInteger(0);
+//  public static ThreadLocal<AtomicInteger> t1 = ThreadLocal.withInitial(() -> a);
 //}
 //
 //class ThreadA extends Thread {
 //
 //  @Override
 //  public void run() {
-//    for (int i = 0; i < 3; i++) {
-//      System.out.println("ThreadA get Value = " + ThreadLocalDemo3.t1++);
+//    try {
+//      for (int i = 0; i < 3; i++) {
+//        System.out.println("ThreadA get Value = " + ThreadLocalDemo2.t1.get().getAndIncrement());
+//        Thread.sleep(200);
+//      }
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
 //    }
 //  }
 //}
@@ -23,8 +27,13 @@
 //
 //  @Override
 //  public void run() {
-//    for (int i = 0; i < 3; i++) {
-//      System.out.println("ThreadB get Value = " + ThreadLocalDemo3.t1++);
+//    try {
+//      for (int i = 0; i < 3; i++) {
+//        System.out.println("ThreadB get Value = " + ThreadLocalDemo2.t1.get().getAndIncrement());
+//        Thread.sleep(200);
+//      }
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
 //    }
 //  }
 //}
@@ -32,12 +41,17 @@
 //class Test {
 //
 //  public static void main(String[] args) {
-//    ThreadA a = new ThreadA();
-//    ThreadB b = new ThreadB();
-//    a.start();
-//    b.start();
-//    for (int i = 0; i < 3; i++) {
-//      System.out.println("Main get Value " + ThreadLocalDemo3.t1++);
+//    try {
+//      ThreadA a = new ThreadA();
+//      ThreadB b = new ThreadB();
+//      a.start();
+//      b.start();
+//      for (int i = 0; i < 3; i++) {
+//        System.out.println("Main get Value " + ThreadLocalDemo2.t1.get().getAndIncrement());
+//        Thread.sleep(200);
+//      }
+//    } catch (InterruptedException e) {
+//      e.printStackTrace();
 //    }
 //  }
 //}

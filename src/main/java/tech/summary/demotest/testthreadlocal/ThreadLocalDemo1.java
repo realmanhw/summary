@@ -1,4 +1,4 @@
-//package com.yuepaijie.controller;
+//package tech.summary.demotest.testthreadlocal;
 //
 //public class ThreadLocalDemo1 {
 //  public static ThreadLocal t1 = new ThreadLocal();
